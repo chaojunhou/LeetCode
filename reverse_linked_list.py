@@ -13,8 +13,9 @@ class Solution:
         return q
     def reverseList2(self, head):
         pre = None
-        while head:
-            p = head.next # 把当前的指针链接到前一个元素
+        cur = head
+        while cur:
+            p = cur.next # 把当前的指针链接到前一个元素
             cur.next = pre
             pre = cur
             cur = p
@@ -54,7 +55,7 @@ if __name__ == '__main__':
         p.next = ListNode(value)
         p = p.next
     p.next = None
-    p = sol.reverseList3(head.next)
+    p = sol.reverseList2(head.next)
     print 'fuck'
     while p :
         print p.val

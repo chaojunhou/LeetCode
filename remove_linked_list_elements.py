@@ -21,7 +21,7 @@ class Solution:
 
 if __name__ == '__main__':
     sol = Solution()
-    lst = [1,2,6,3,4,5,6]
+    lst = [1,2,6,3,4,5]
     #lst = [1,1]
     head=p= ListNode(-1)
     for value in lst:

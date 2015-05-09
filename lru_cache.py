@@ -1,3 +1,4 @@
+import collections
 class Node:
     def __init__(self,k,v):
         self.key=k
@@ -61,9 +62,27 @@ class LRUCache:
                 self.size-=1
                 del self.p[self.cache.tail.key]
                 self.cache.removeLast()
-        
+class LRUCache1:
+    def __init__(self,capacity):
+        self.capacity = capacity
+        self.cache = collections.OrderedDict()
 
+    def get(self,key):
+        if key not in self.cache:
+            return -1
+        value = self.cache.pop(key)
+        self.cache[key] = value  # del the key item and insert to the last
+        return value
+
+    def set(self,key,value):
+        if key in self.cache:
+            self.cache.pop(key)
+        if len(self.cache) == self.capacity:
+            self.cache.popitem(last=False) # del from the front
+        self.cache[key] = value
+
+        
 if __name__=='__main__':
     Lru=LRUCache(10)
-    Lru.get(3,1)
     Lru.set(3,1)
+    Lru.get(3,1)

@@ -25,5 +25,5 @@ class Solution:
 if __name__ == '__main__':
     sol = Solution()
     num=[2,1,1,2]
-    print sol.rob1(num)
+    print sol.rob(num)
         

@@ -1,9 +1,11 @@
+import random
 class Solution:
     def findKthLargest(self, nums, k):
         n = len(nums)
-        #print nums,k
         if n==1:
             return nums[0]
+        q = random.randint(0,n-1)
+        nums[-1], nums[q] = nums[q], nums[-1]
         pivort = nums[-1]
         i = -1
         for j in range(n-1):
@@ -18,15 +20,6 @@ class Solution:
             return self.findKthLargest(nums[n-cnt+1:], k)
         elif cnt < k:
             return self.findKthLargest(nums[:n-cnt],k-cnt)
-    def partition(self, nums, p, r):
-        x = nums[r-1]
-        i = p - 1
-        for j in range(p,r-1):
-            if nums[j] <= x:
-                i += 1
-                nums[i], nums[j] = nums[j], nums[i]
-        nums[i+1], nums[r-1] = nums[r-1], nums[i+1]
-        return i+1
         
 if __name__ == '__main__':
     sol = Solution()

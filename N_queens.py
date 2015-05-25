@@ -1,30 +1,23 @@
 class Solution:
     
     def solveNQueens(self,n):
-        self.res=[]
-        self.length=0
-        self.dfs(0,[],n,board=[-1 for i in range(n)])
-        return self.res
-    def check(self,depth,col,board):
-        for index in range(depth):
-            if board[index]==col or abs(depth-index)==abs(board[index]-col):
-                return False
-        return True           
-    def dfs(self,depth,answer,n,board):
-        if depth==n:
+        self.res = []
+
+        self.dfs(0,[], n, [-1 for i in xrange(n)])
+        return self.res         
+    def dfs(self, depth, answer, n, board):
+        if depth == n:
             self.res.append(answer)
-            self.length+=1
-            return
-        for index in range(n):
+        for col in range(n):
             flag=True
-            for col in range(depth):
-                if board[col]==index or abs(depth-col)==abs(board[col]-index):
-                    flag=False
+            for row in range(depth):
+                if board[row] == col or (depth - row) == abs(col - board[row]):
+                    flag = False
                     break
             if flag:
-                board[depth]=index
-                s='.'*n
-                self.dfs(depth+1,answer+['.'*index+'Q'+'.'*(n-index-1)],n,board)
+                board[depth]=col
+                self.dfs(depth+1, answer+['.'*col + 'Q' + '.'*(n-col-1)], n, board)
+    
 
 if __name__=='__main__':
     sol=Solution()

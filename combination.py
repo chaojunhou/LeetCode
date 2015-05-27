@@ -14,6 +14,17 @@ class Solution:
         Temp=[]
         self.find(n,k,Temp)
         return self.ans
+    def combine_2(self, n, k):
+        self.res = []
+        self.helper(n, k, 0, 1, [])
+        return self.res
+    def helper(self, n, k, depth, val, ans):
+        if depth == k:
+            self.res.append(ans[:])
+            return 
+        for i in range(val, n+1):
+            self.helper(n, k, depth+1, i+1, ans + [i])
+        
            
     def combine(self,n,k):
         self.res=[]
@@ -32,25 +43,12 @@ class Solution:
             print tmp,
             print '---after'
             tmp.pop()
-    def subset(self,S):
-        ans=[]
-        n=len(S)
-        S.sort()
-        for index in range(1<<n):
-            ans.append(self.print_subset(S,n,index))
-        return ans
-    def print_subset(self,S,n,s):
-        res=[]
-        for index in range(n):
-            if s&(1<<index):
-                
-                res.append(S[index])
-        return res
+
 
 
 if __name__=='__main__':
     sol=Solution()
     from pprint import pprint
     S=[4,1,0]
-    #pprint(sol.subset(S))
-    print sol.combine(4,3)
+    print sol.combine_2(1, 1)
+    print sol.combine_2(4, 3)

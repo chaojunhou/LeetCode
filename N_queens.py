@@ -2,12 +2,11 @@ class Solution:
     
     def solveNQueens(self,n):
         self.res = []
-
         self.dfs(0,[], n, [-1 for i in xrange(n)])
         return self.res         
     def dfs(self, depth, answer, n, board):
         if depth == n:
-            self.res.append(answer)
+            self.res.append(answer[:])
         for col in range(n):
             flag=True
             for row in range(depth):

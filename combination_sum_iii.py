@@ -12,6 +12,7 @@ class Solution:
             return
         elif n ==0 and k == 0:
             self.res.append(tmp[:])
+        
         else:
             pre = -1
             for i in range(start+1,10):
@@ -27,5 +28,5 @@ class Solution:
 if __name__ == '__main__':
     sol = Solution()
     k = 3
-    n = 7
+    n = 9
     print sol.combinationSum3(k,n)

@@ -30,8 +30,10 @@ class Solution:
         for index in range(length):
             if num[index] not in dic:
                 dic[num[index]]=index+1
+        print 
         for i in range(length):
             if dic.get(target-num[i]):
+                print i, dic[target-num[i]]
                 if i+1!=dic[target-num[i]]:
                     return  i+1,dic[target-num[i]]         
 

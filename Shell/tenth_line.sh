@@ -1,0 +1,1 @@
+awk 'NR == 10' flow.dat 

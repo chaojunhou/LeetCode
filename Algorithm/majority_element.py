@@ -24,12 +24,31 @@ class Solution:
                 if not stack:
                     stack.append(element)
         return stack[-1]
+    def majorityElement2(self, nums):
+        target = 0
+        n = len(nums)
+        count = 0
+        for i in range(n):
+            if nums[i] < 0:
+                nums[i] = ~nums[i] + 1
+                count += 1
+        for i in range(32):
+            bit = 0
+            for j in range(n):
+                bit += (nums[j] >> i) & 1
+            if bit << 1 >= n:
+                target |= 1<<i
+        if count << 1 >=n:
+            return -target
+        return target
         
 
 
 if __name__=='__main__':
-    num=[1,2,3,2,4,2]
+    #num=[1,2,3,2,4,2]
+    num = [-1]
     sol=Solution()
     print sol.majorityElement(num)
     print sol.majorityElement1(num)
+    print sol.majorityElement2(num)
     

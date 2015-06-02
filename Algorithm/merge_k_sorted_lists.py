@@ -12,26 +12,24 @@ class Solution:
                 heap.append((node.val,node))
         heapq.heapify(heap)
         while heap:
-            tmp=heapq.heappop(heap)
-            dummy.next=ListNode(tmp[0])
-            if tmp[1]:
-                heapq.heappush(heap,(tmp[1].next.val,tmp[1].next))
+            dummy.next = heapq.heappop(heap)[1]
+            dummy = dummy.next
+            if dummy.next:
+                heapq.heappush(heap,(dummy.next.val,dummy.next))
         return dummy.next
     def mergeKLists_1(self,lists):
         n=len(lists)
-        if n==0 or lists is None:
+        if n==0 :
             return None
-        while n>1:
-            k=(n+1)/2
-            for i in range(n/2):
-                self.merge(lists[i],lists[i+k])
-            n=k
-        return lists[0]
+        if n == 1:
+            return lists[0]
+        mid = n/2
+        return self.merge(self.mergeKLists(lists[:mid]),self.mergeKLists(lists[mid:]))
     def merge(self,head1,head2):
         if head1 is None:
             return head2
         if head2 is None:
-            return head2
+            return head1
         dummy=ListNode(-1)
         pre=dummy
         while head1 and head2:
@@ -47,3 +45,6 @@ class Solution:
         if head2 is None:
             pre.next=head1
         return dummy.next  
+if __name__ == '__main__' :
+    sol = Solution
+    

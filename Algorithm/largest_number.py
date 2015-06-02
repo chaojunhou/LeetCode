@@ -33,29 +33,52 @@ class Solution:
         def merge_sort(num):
             if len(num)<2:
                 return num
-            def merge(left,right):
-                merged=[]
-                while left and right:
-                    merged.append(left.pop(0) if int(str(left[0])+str(right[0]))>=int(str(right[0])+str(left[0])) else right.pop(0))
-                while left:
-                    merged.append(left.pop(0))
-                while right:
-                    merged.append(right.pop(0))
-                return merged
+
             middle=len(num)/2
             left=merge_sort(num[:middle])
             right=merge_sort(num[middle:])
-            return merge(left,right)
+        
+            merged=[]
+            while left and right:
+                merged.append(left.pop(0) if str(left[0])+str(right[0]) >= str(right[0])+str(left[0]) else right.pop(0))
+            while left:
+                merged.append(left.pop(0))
+            while right:
+                merged.append(right.pop(0))
+            return merged
+           
         num=merge_sort(num)
         st=''.join(str(element) for element in num)
         if st[0]=='0':
             return '0'
         return st
-            
+    def largestNumber_3(self,num):
+        
+        def quickSort(num, low, high):
+            def partition(num, low, high):
+                x = num[high]
+                i = low -1
+                for j in range(low, high):
+                    if str(num[j]) + str(x) > str(x) + str(num[j]):
+                        i += 1
+                        num[i], num[j] = num[j], num[i]
+                num[i+1], num[high] = num[high], num[i+1]
+                return i+1                
+            if low < high:
+                q = partition(num, low, high)
+                quickSort(num, low, q-1)
+                quickSort(num, q+1, high)
+        quickSort(num, 0, len(num)-1)
+        st=''.join(str(element) for element in num)
+        if st[0]=='0':
+            return '0'
+        return st            
         
 
 
 if __name__=='__main__':
     sol=Solution()
-    num=[1]
+    num=[3, 30, 34, 5, 9]
     print sol.largestNumber_2(num)
+    print sol.largestNumber_1(num)
+    print sol.largestNumber_3(num)

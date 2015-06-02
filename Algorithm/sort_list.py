@@ -3,21 +3,20 @@ class ListNode:
         self.val=x
         self.next=None
 class Solution:
-    def sortList(self,head):
+    # @param head, a ListNode
+    # @return a ListNode
+    def sortList(self, head):
         if not head or not head.next:
             return head
         slow=head
-        fast=slow
+        fast=head
         while fast.next and fast.next.next:
             slow=slow.next
             fast=fast.next.next
         head1=head
         head2=slow.next
         slow.next=None
-        head1=self.sortList(head1)
-        head2=self.sortList(head2)
-        head=self.merge(head1,head2)
-        return head
+        return self.merge(self.sortList(head1), self.sortList(head2))
     def merge(self,head1,head2):
         if head1 is None:
             return head2
@@ -34,10 +33,11 @@ class Solution:
                 head2=head2.next
             pre=pre.next
         if head1 is None:
-            pre.next=head2
+            pre.next = head2
         if head2 is None:
-            pre.next=head1
-        return dummy.next  
+            pre.next = head1
+        return dummy.next 
+         
 if __name__=='__main__':
     sol=Solution()
     List=head=ListNode(1)

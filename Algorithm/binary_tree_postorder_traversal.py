@@ -46,9 +46,21 @@ class Solution:
                     if curr.right:
                         stack.append(curr.right)
                     if curr.left:
-                        stack.append(curr.left)
-                    
+                        stack.append(curr.left)      
         return lst
+    def postorderTraversal1(self, root):
+        stack = []
+        lst = []
+        if root:
+            stack.append(root)
+            while stack:
+                p =stack.pop()
+                lst.append(p.val)
+                if p.left:
+                    stack.append(p.left)
+                if p.right:
+                    stack.append(p.right)
+        return lst[::-1]
 if __name__=='__main__':
     sol=Solution()
     import random
@@ -58,4 +70,5 @@ if __name__=='__main__':
     root=sol.sortedArrayToBST(num)
     print sol.postorderTraversal(root)
     print sol.iterative_postorder(root)
+    print sol.postorderTraversal1(root)
         

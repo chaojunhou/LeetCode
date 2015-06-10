@@ -28,7 +28,10 @@ class Solution:
         lst.sort()
         h = lst[2] - lst[1]
         return (C-A)*(D-B) + (H-F)*(G-E) - w*h
-        
+    def computeArea1(self, A, B, C,D,E, F, G, H):
+        res = (C-A)*(D-B) + (H-F)*(G-E)
+        return  res   if C < E or G < A or D < F or H < B else res-(min(C,G)-max(A,E))*(min(D,H)-max(B,F))
+        #return (C-A)*(D-B) + (H-F)*(G-E) if C < E or G < A or D < F or H < B else (C-A)*(D-B) + (H-F)*(G-E) - (min(C,G)-max(A,E))*(min(D,H)-max(B,F))
 
 
 if __name__ == '__main__':
@@ -43,5 +46,6 @@ if __name__ == '__main__':
     G = 9
     H = 2
     print sol.computeArea(A,B,C,D,E,F,G,H)
+    print sol.computeArea1(A,B,C,D,E,F,G,H)
     
     

@@ -23,19 +23,16 @@ class Solution:
     def countNodes(self, root):
         if not root:
             return 0
-        L = root
         R = root
-        hleft = 0
-        hright = 0
-        while L:
-            hleft += 1
-            L = L.left
+        L = root
+        h = 0
         while R:
-            hright += 1
+            h += 1
             R = R.right
-        if hleft == hright:
-            return 2**hleft -1
-        return  self.GetNodeNumKthLevel(root, hright) + 2**(hright-1) - 1
+            L = L.left
+        if not L:
+            return (1<<h) -1
+        return  (1<<h-1) + self.countNodes(root.left)
     def GetNodeNumKthLevel(self, root, k):
         if k == 0 or root is None:
             return 0
@@ -58,9 +55,9 @@ class Solution:
 if __name__ == '__main__':
     sol = Solution()
     import random
-    num=[x for x in range(7)]
+    num=[x for x in range(15)]
     num.sort()
     print num
     
     root = sol.sortedArrayToBST(num)
-    print len(num), sol.countNodes1(root)
+    print len(num), sol.countNodes(root)

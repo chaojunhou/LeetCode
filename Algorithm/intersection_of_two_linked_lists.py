@@ -3,35 +3,63 @@ class ListNode:
         self.val=x
         self.next=None
 class Solution:
-    def addTwoNumbers(self,l1,l2):
-        dummy=ListNode(-1)
-        p=dummy
-        carry=0
-        while l1 and l2:
-            p.next=ListNode((l1.val+l2.val+carry)%10)
-            carry=(l1.val+l2.val+carry)/10
-            l1=l1.next
-            l2=l2.next
-            p=p.next
-        while l1:
-            p.next=ListNode((l1.val+carry)%10)
-            carry=(l1.val+carry)/10
-            p=p.next
-            l1=l1.next
-            
-        while l2:
-            p.next=ListNode((l2.val+carry)%10)
-            carry=(l2.val+carry)/10
-            p=p.next
-            l2=l2.next
-        if carry:
-            p.next=ListNode(carry)
-        return dummy.next
-            
+
+    def getIntersectionNode(self, headA, headB):
+        
+        if not headA or not headB:
+            return None
+        p1 = headA
+        p2 = headB
+        tmp = 0
+        while p1 != p2:
+            p1 = p1.next
+            p2 = p2.next
+            if not p1:
+                p1= headB
+                tmp += 1
+                if tmp == 2:
+                    return None  
+            if not p2 :
+                p2 = headA
+        return p1
+                
+    def getIntersectionNode1(self, headA, headB):
+        p=headA
+        q=headB
+        lenA=self.length(p)
+        lenB=self.length(q)
+        if lenA==0 or lenB==0:
+            return None
+        if lenA>lenB:
+            diff=lenA-lenB
+            go=0
+            while go<diff:
+                headA=headA.next
+                go+=1
+            while headA!=headB:
+                headA=headA.next
+                headB=headB.next
+            return headA
+        else:
+            diff=lenB-lenA
+            go=0
+            while go<diff:
+                headB=headB.next
+                go+=1
+            while headA!=headB:
+                headA=headA.next
+                headB=headB.next
+            return headB
+    def length(self,head):
+        count=0
+        while head:
+            count+=1
+            head=head.next
+        return count                
 
 if __name__=='__main__':
     sol=Solution()
-    head1=l1=ListNode(1)
+    p=head1=l1=ListNode(1)
     lst1=[2,4,3]
     for element in lst1:
         l1.next=ListNode(element)
@@ -42,9 +70,8 @@ if __name__=='__main__':
     for element in lst2:
         l2.next=ListNode(element)
         l2=l2.next
-    l2.next=None
-    head=sol.addTwoNumbers(head1,head2)
-    print 'fuck'
-    while head:
-        print head.val
-        head=head.next
+    l2.next = p.next.next
+    #l2.next = None
+    print p.next.next.val
+    print sol.getIntersectionNode(head1,head2).val
+

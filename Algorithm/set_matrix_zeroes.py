@@ -1,19 +1,17 @@
 class Solution:
     def setZeroes(self,matrix):
-        row=len(matrix)
-        col=len(matrix[0])
-        row_flag=[False for x in range(row)]
-        col_flag=[False for y in range(col)]
+        row = len(matrix)
+        col = len(matrix[0])
+        row_flag = [False for x in range(row)]
+        col_flag = [False for y in range(col)]
         for x in range(row):
             for y in range(col):
-                if matrix[x][y]==0:
-                    row_flag[x]=True
-                    col_flag[y]=True
+                if matrix[x][y] == 0:
+                    row_flag[x] = True
+                    col_flag[y] = True
         for x in range(row):
             for y in range(col):
-                if row_flag[x]:
-                    matrix[x][y]=0
-                elif col_flag[y]:
+                if row_flag[x] or col_flag[y]:
                     matrix[x][y]=0
         return matrix
     def setZeroes_1(self,matrix):
@@ -47,8 +45,8 @@ class Solution:
             for y in range(col):
                 matrix[0][y]=0
         return matrix
-                     
-
+    def setZeros2(matrix):
+        
 
 
 if __name__=='__main__':

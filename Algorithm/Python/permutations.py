@@ -1,12 +1,12 @@
 class Solution:
     def permute(self,num):
-        length=len(num)
-        if length==1:return [num]
+        n = len(num)
+        if n == 1:
+            return [num]
         res=[]
-        for index in range(length):
-            # swap the elments with the first
-            for x in self.permute(num[:index]+num[index+1:]):
-                res.append([num[index]]+x)
+        for i in range(n):
+            for subperms in self.permute(num[:i]+num[i+1:]):
+                res.append([num[i]]+subperms)
         return res
     def perm(self,arr, pos = 0):
         if pos == len(arr):

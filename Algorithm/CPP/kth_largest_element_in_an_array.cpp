@@ -7,17 +7,29 @@ using namespace std;
 
 class Solution {
 public:
-	vector<vector<int>> generate(int numRows) {
-		vector<vector<int>> res(numRows);
-		for (int i = 0; i < numRows; i++)
+    int findKthLargest(vector<int>& nums, int k) {
+		int n = nums.size();
+		if (n == 1) return nums[0];
+		k = n - k;
+		//cout << k << " k " << n << " n " << endl;
+		return findKthSmallest(nums,0,n-1, k);
+	}
+	int findKthSmallest(vector<int>& nums, int left, int right, int k)
+	{
+		int pivort = nums[right];
+		int i = left;
+		for (int j = left; j < right; j++)
 		{
-			res[i].resize(i + 1,1);
-			for (int j = 1; j < i; ++j)
+			if (nums[j] <= pivort)
 			{
-				res[i][j] = res[i - 1][j - 1] + res[i - 1][j];
+				swap(nums[i++], nums[j]);
 			}
+			
 		}
-		return res;
+		swap(nums[i], nums[right]);
+		if(i-left == k) return nums[i];
+		if (i-left > k) return findKthSmallest(nums,left,i-1, k);
+		else return findKthSmallest(nums, i+1, right, k - (i -left+1));
 	}
 };
 int main()
